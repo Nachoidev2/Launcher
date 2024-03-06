@@ -19,6 +19,8 @@ namespace Launcher
         public Form1()
         {
             InitializeComponent();
+
+            //Set Size
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -30,15 +32,18 @@ namespace Launcher
             button2.Dock = DockStyle.Fill;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
+            //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
             button1.Font = new Font(button1.Font.FontFamily, 16, FontStyle.Bold);
             button2.Font = new Font(button2.Font.FontFamily, 16, FontStyle.Bold);
 
+            //Disable Default Border Windows
             this.FormBorderStyle = FormBorderStyle.None;
             this.ControlBox = false;
 
             tableLayoutPanel1.ColumnCount = 5;
 
+            //Load list
             LoadGames();
 
             listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
@@ -47,6 +52,10 @@ namespace Launcher
             listBox1.MouseDown += ListBox1_MouseDown;
 
             GameSelect(false);
+
+            tableLayoutPanel2.MouseDown += TableLayoutPanel2_MouseDown;
+            tableLayoutPanel2.MouseMove += TableLayoutPanel2_MouseMove;
+            tableLayoutPanel2.MouseUp += TableLayoutPanel2_MouseUp;
 
         }
 
@@ -74,7 +83,6 @@ namespace Launcher
                     }
 
                     listBox1.Items.Add(juego);
-                    //pictureBox1.ImageLocation = juego.Caratula;
 
                     GameSelect(false);
                     SaveGames();
@@ -127,11 +135,11 @@ namespace Launcher
             }
         }
 
+        // Delete item from listbox
         private void Delete()
         {
             if (listBox1.SelectedItem != null)
             {
-                // Delete item from listbox
                 listBox1.Items.Remove(listBox1.SelectedItem);
 
                 GameSelect(false);
@@ -149,7 +157,7 @@ namespace Launcher
             ToolStripMenuItem menuItem1 = new ToolStripMenuItem("Rename");
             ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Delete");
 
-            // Agregar manejadores de eventos a los elementos del menú flotante
+            // Adds Events to Buttons
             menuItem1.Click += MenuItem1_Click;
             menuItem2.Click += MenuItem2_Click;
 
@@ -176,17 +184,17 @@ namespace Launcher
             }
         }
 
+        //Edit Item
         private void MenuItem1_Click(object sender, EventArgs e)
         {
             
-            //MessageBox.Show("Opción 1 seleccionada");
         }
 
+        //Delete Item
         private void MenuItem2_Click(object sender, EventArgs e)
         {
             Delete();
             GameSelect(false);
-            //MessageBox.Show("Opción 2 seleccionada");
         }
 
         //show and hide play button event
@@ -236,7 +244,7 @@ namespace Launcher
             }
         }
 
-        //windows
+        // Custom Window
         private void Quit(object sender, EventArgs e)
         {
             Close();
@@ -255,6 +263,34 @@ namespace Launcher
             else
             {
                 this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private bool dragging = false;
+        private Point dragStartPoint;
+
+        private void TableLayoutPanel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                dragging = true;
+                dragStartPoint = new Point(e.X, e.Y);
+            }
+        }
+
+        private void TableLayoutPanel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point location = this.PointToScreen(e.Location);
+                this.Location = new Point(location.X - dragStartPoint.X, location.Y - dragStartPoint.Y);
+            }
+        }
+        private void TableLayoutPanel2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                dragging = false;
             }
         }
     }
