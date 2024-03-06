@@ -17,6 +17,8 @@ namespace Launcher
     public partial class Form1 : Form
     {
         private ToolStripDropDownMenu toolStripDropDownMenu;
+        private Timer fadeTimer;
+        private bool fadeIn = true;
         public Form1()
         {
             InitializeComponent();
@@ -61,6 +63,12 @@ namespace Launcher
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
 
+            fadeTimer = new Timer
+            {
+                Interval = 50, // Ajusta para controlar la velocidad del fade
+            };
+            fadeTimer.Tick += FadeTimer_Tick;
+            //fadeTimer.Start();
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -426,6 +434,24 @@ namespace Launcher
             // Finalizar la edición y volver a activar el ListBox
             listBox1.Enabled = true;
             listBox1.SelectionMode = SelectionMode.MultiSimple;
+        }
+
+        private void FadeTimer_Tick(object sender, EventArgs e)
+        {
+            if (fadeIn)
+            {
+                if (this.Opacity < 1)
+                    this.Opacity += 0.05; // Aumenta la opacidad
+                else
+                    fadeIn = false; // Completa el fade in, puedes parar el timer o iniciar un fade out
+            }
+            else
+            {
+                if (this.Opacity > 0)
+                    this.Opacity -= 0.05; // Disminuye la opacidad
+                else
+                    fadeIn = true; // Completa el fade out, puedes parar el timer o reiniciar un fade in
+            }
         }
     }
 }
