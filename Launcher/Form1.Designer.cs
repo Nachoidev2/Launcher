@@ -122,6 +122,7 @@
             // 
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Image = global::Launcher.Properties.Resources.minus;
             this.button5.Location = new System.Drawing.Point(612, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(54, 33);
