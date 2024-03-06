@@ -57,6 +57,9 @@ namespace Launcher
             tableLayoutPanel2.MouseMove += TableLayoutPanel2_MouseMove;
             tableLayoutPanel2.MouseUp += TableLayoutPanel2_MouseUp;
 
+            this.KeyPreview = true;
+            this.KeyDown += Form1_KeyDown;
+
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -66,23 +69,23 @@ namespace Launcher
                 fileDialog.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var juego = new Game
+                    var Reference_Game = new Game
                     {
                         Path = fileDialog.FileName,
                         Name = System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)
                     };
 
-                    // Dialog Caratula
+                    // Dialog Cover
                     using (var imgDialog = new OpenFileDialog())
                     {
                         imgDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
                         if (imgDialog.ShowDialog() == DialogResult.OK)
                         {
-                            juego.Caratula = imgDialog.FileName;
+                            Reference_Game.Cover = imgDialog.FileName;
                         }
                     }
 
-                    listBox1.Items.Add(juego);
+                    listBox1.Items.Add(Reference_Game);
 
                     GameSelect(false);
                     SaveGames();
@@ -93,16 +96,17 @@ namespace Launcher
         //Play Game
         private void Play_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem is Game juego)
+            if (listBox1.SelectedItem is Game Reference_Game)
             {
                 this.WindowState = FormWindowState.Minimized;
-                Process.Start(juego.Path);
+                Process.Start(Reference_Game.Path);
             }
         }
 
+        // Update Picture of item select.
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem is Game juego)
+            if (listBox1.SelectedItem is Game Reference_Game)
             {
                 using (var imgDialog = new OpenFileDialog())
                 {
@@ -110,16 +114,18 @@ namespace Launcher
                     if (imgDialog.ShowDialog() == DialogResult.OK)
                     {
                         // Change picture of the game
-                        juego.Caratula = imgDialog.FileName;
+                        Reference_Game.Cover = imgDialog.FileName;
 
-                        // Actualizar el PictureBox adicional (pictureBoxCaratulaSeleccionada)
-                        pictureBox1.ImageLocation = juego.Caratula;
+                        // Update Picture
+                        pictureBox1.ImageLocation = Reference_Game.Cover;
 
                         SaveGames();
                     }
                 }
             }
         }
+
+        // Event if select item change
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null && listBox1.SelectedItem is Game juego)
@@ -127,11 +133,14 @@ namespace Launcher
                 GameSelect(true);
             }
         }
+
+        // Event to delete item with key pressed.
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
                 Delete();
+                GameSelect(false);
             }
         }
 
@@ -201,9 +210,9 @@ namespace Launcher
         private void GameSelect(bool IsSelect)
         {
             button2.Visible = IsSelect;
-            if (IsSelect == true && listBox1.SelectedItem is Game juego)
+            if (IsSelect == true && listBox1.SelectedItem is Game Reference_Game)
             {
-                pictureBox1.ImageLocation = juego.Caratula;
+                pictureBox1.ImageLocation = Reference_Game.Cover;
             }
             else
             {

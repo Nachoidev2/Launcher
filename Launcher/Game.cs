@@ -10,7 +10,7 @@ namespace Launcher
     {
         public string Path { get; set; }
         public string Name { get; set; }
-        public string Caratula { get; set; }
+        public string Cover { get; set; }
         public override string ToString()
         {
             return Name;
