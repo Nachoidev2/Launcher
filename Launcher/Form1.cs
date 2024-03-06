@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Launcher
 {
@@ -26,16 +27,16 @@ namespace Launcher
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Dock = DockStyle.Fill;
+            Cover.Dock = DockStyle.Fill;
             listBox1.Dock = DockStyle.Fill;
-            button1.Dock = DockStyle.Fill;
-            button2.Dock = DockStyle.Fill;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            Add.Dock = DockStyle.Fill;
+            Play.Dock = DockStyle.Fill;
+            Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
-            button1.Font = new Font(button1.Font.FontFamily, 16, FontStyle.Bold);
-            button2.Font = new Font(button2.Font.FontFamily, 16, FontStyle.Bold);
+            Add.Font = new Font(Add.Font.FontFamily, 16, FontStyle.Bold);
+            Play.Font = new Font(Play.Font.FontFamily, 16, FontStyle.Bold);
 
             //Disable Default Border Windows
             this.FormBorderStyle = FormBorderStyle.None;
@@ -123,7 +124,7 @@ namespace Launcher
                         Reference_Game.Cover = imgDialog.FileName;
 
                         // Update Picture
-                        pictureBox1.ImageLocation = Reference_Game.Cover;
+                        Cover.ImageLocation = Reference_Game.Cover;
 
                         SaveGames();
                     }
@@ -180,6 +181,9 @@ namespace Launcher
             // Create Float Menu
             toolStripDropDownMenu = new ToolStripDropDownMenu();
 
+            // Custom menu
+            toolStripDropDownMenu.Renderer = new MyCustomRenderer();
+
             // Create elements
             ToolStripMenuItem menuItem1 = new ToolStripMenuItem("Rename");
             ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Change Cover");
@@ -195,6 +199,33 @@ namespace Launcher
             toolStripDropDownMenu.Items.Add(menuItem2);
             toolStripDropDownMenu.Items.Add(menuItem3);
         }
+
+        // Class Custom menu
+        class MyCustomRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            {
+                if (!e.Item.Selected)
+                {
+                    // Background item selected
+                    Rectangle rc = new Rectangle(Point.Empty, e.Item.Size);
+                    Color colorBackground = Color.FromArgb(50, 50, 50);
+                    using (SolidBrush brush = new SolidBrush(colorBackground))
+                        e.Graphics.FillRectangle(brush, rc);
+                }
+                else
+                {
+                    base.OnRenderMenuItemBackground(e);
+                }
+            }
+            protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+            {
+                e.TextColor = Color.White;
+                e.TextFont = new Font("Arial", 9, FontStyle.Bold);
+                base.OnRenderItemText(e);
+            }
+        }
+
         // open submenu
         private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -243,14 +274,14 @@ namespace Launcher
         //show and hide play button event
         private void GameSelect(bool IsSelect)
         {
-            button2.Visible = IsSelect;
+            Play.Visible = IsSelect;
             if (IsSelect == true && listBox1.SelectedItem is Game Reference_Game)
             {
-                pictureBox1.ImageLocation = Reference_Game.Cover;
+                Cover.ImageLocation = Reference_Game.Cover;
             }
             else
             {
-                pictureBox1.ImageLocation = null;
+                Cover.ImageLocation = null;
             }
         }
 
