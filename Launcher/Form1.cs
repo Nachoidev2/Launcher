@@ -106,6 +106,12 @@ namespace Launcher
         // Update Picture of item select.
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            ChangeCover();
+        }
+
+        // Change Picture
+        private void ChangeCover()
+        {
             if (listBox1.SelectedItem is Game Reference_Game)
             {
                 using (var imgDialog = new OpenFileDialog())
@@ -124,7 +130,7 @@ namespace Launcher
                 }
             }
         }
-
+        
         // Event if select item change
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -134,13 +140,24 @@ namespace Launcher
             }
         }
 
-        // Event to delete item with key pressed.
+        // Event key pressed.
         private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
+        {   
+            // delete
             if (e.KeyCode == Keys.Delete)
             {
                 Delete();
                 GameSelect(false);
+            }
+            // Edit
+            if (e.KeyCode == Keys.F2)
+            {
+                Edit();
+            }
+            // Finish edit on Enter key
+            else if (e.KeyCode == Keys.Enter)
+            {
+                FinalizarEdicionNombre(listBox1.SelectedIndex, listBox1.Text);
             }
         }
 
@@ -157,6 +174,7 @@ namespace Launcher
             }
         }
 
+        // submenu
         private void CreateMenu()
         {
             // Create Float Menu
@@ -164,17 +182,20 @@ namespace Launcher
 
             // Create elements
             ToolStripMenuItem menuItem1 = new ToolStripMenuItem("Rename");
-            ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Delete");
+            ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Change Cover");
+            ToolStripMenuItem menuItem3 = new ToolStripMenuItem("Delete");
 
             // Adds Events to Buttons
-            menuItem1.Click += MenuItem1_Click;
-            menuItem2.Click += MenuItem2_Click;
+            menuItem1.Click += (sender, e) => MenuItem_Click(sender, e, "Rename");
+            menuItem2.Click += (sender, e) => MenuItem_Click(sender, e, "Change Cover");
+            menuItem3.Click += (sender, e) => MenuItem_Click(sender, e, "Delete");
 
             // add elements to the float menu
             toolStripDropDownMenu.Items.Add(menuItem1);
             toolStripDropDownMenu.Items.Add(menuItem2);
+            toolStripDropDownMenu.Items.Add(menuItem3);
         }
-
+        // open submenu
         private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -193,18 +214,31 @@ namespace Launcher
             }
         }
 
-        //Edit Item
-        private void MenuItem1_Click(object sender, EventArgs e)
+        private void MenuItem_Click(object sender, EventArgs e, string action)
         {
-            
+            if (sender is ToolStripMenuItem menuItem)
+            {
+                // Get Index
+                int selectedIndex = listBox1.SelectedIndex;
+
+                switch (action)
+                {
+                    case "Rename":
+                        Edit();
+                        break;
+                    case "Change Cover":
+                        ChangeCover();
+                        break;
+                    case "Delete":
+                        Delete();
+                        GameSelect(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
-        //Delete Item
-        private void MenuItem2_Click(object sender, EventArgs e)
-        {
-            Delete();
-            GameSelect(false);
-        }
 
         //show and hide play button event
         private void GameSelect(bool IsSelect)
@@ -233,6 +267,7 @@ namespace Launcher
             // deserialize the list to json and save in a file
             string json = JsonConvert.SerializeObject(games, Formatting.Indented);
             File.WriteAllText("games.json", json);
+            SortList(true);
         }
 
         private void LoadGames()
@@ -251,6 +286,7 @@ namespace Launcher
                     listBox1.Items.Add(game);
                 }
             }
+            SortList(true);
         }
 
         // Custom Window
@@ -301,6 +337,64 @@ namespace Launcher
             {
                 dragging = false;
             }
+        }
+
+        // Sort
+        private void SortList(bool ascending)
+        {
+            // Obtén los elementos de la ListBox y conviértelos a una lista
+            List<object> items = listBox1.Items.Cast<object>().ToList();
+
+            // Ordena la lista según la opción (ascendente o descendente)
+            if (ascending)
+            {
+                items.Sort((a, b) => string.Compare(a.ToString(), b.ToString()));
+            }
+            else
+            {
+                items.Sort((a, b) => string.Compare(b.ToString(), a.ToString()));
+            }
+
+            // Limpia la ListBox y agrega los elementos ordenados
+            listBox1.Items.Clear();
+            listBox1.Items.AddRange(items.ToArray());
+        }
+
+        // edit
+        private void Edit()
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                // Obtener el índice y el nombre actual del item seleccionado
+                int selectedIndex = listBox1.SelectedIndex;
+                string currentName = listBox1.SelectedItem.ToString();
+
+                // Activar el modo de edición en el ListBox para permitir la modificación directa
+                listBox1.SetSelected(selectedIndex, false);
+                listBox1.Enabled = false;
+
+                // Iniciar la edición directa del nombre del item seleccionado en el ListBox
+                listBox1.SelectedIndex = selectedIndex;
+                listBox1.SelectionMode = SelectionMode.One;
+
+                // Crear un TextBox temporal para editar el nombre
+                TextBox textBox = new TextBox();
+                textBox.Parent = listBox1;
+                textBox.Location = listBox1.GetItemRectangle(selectedIndex).Location;
+                textBox.Size = listBox1.GetItemRectangle(selectedIndex).Size;
+                textBox.Text = currentName;
+                textBox.SelectAll();
+                textBox.Focus();
+            }
+        }
+        private void FinalizarEdicionNombre(int selectedIndex, string newName)
+        {
+            // Actualizar el nombre del item en el ListBox y en la lista de juegos
+            listBox1.Items[selectedIndex] = newName;
+
+            // Finalizar la edición y volver a activar el ListBox
+            listBox1.Enabled = true;
+            listBox1.SelectionMode = SelectionMode.MultiSimple;
         }
     }
 }
