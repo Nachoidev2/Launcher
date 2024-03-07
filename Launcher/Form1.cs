@@ -56,9 +56,9 @@ namespace Launcher
 
             GameSelect(false);
 
-            tableLayoutPanel2.MouseDown += TableLayoutPanel2_MouseDown;
-            tableLayoutPanel2.MouseMove += TableLayoutPanel2_MouseMove;
-            tableLayoutPanel2.MouseUp += TableLayoutPanel2_MouseUp;
+            tableLayoutPanel1.MouseDown += Window_MouseDown;
+            tableLayoutPanel1.MouseMove += Window_MouseMove;
+            tableLayoutPanel1.MouseUp += Window_MouseUp;
 
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
@@ -353,7 +353,9 @@ namespace Launcher
         private bool dragging = false;
         private Point dragStartPoint;
 
-        private void TableLayoutPanel2_MouseDown(object sender, MouseEventArgs e)
+
+        // Widnow borde move
+        private void Window_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -362,7 +364,7 @@ namespace Launcher
             }
         }
 
-        private void TableLayoutPanel2_MouseMove(object sender, MouseEventArgs e)
+        private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (dragging)
             {
@@ -370,7 +372,7 @@ namespace Launcher
                 this.Location = new Point(location.X - dragStartPoint.X, location.Y - dragStartPoint.Y);
             }
         }
-        private void TableLayoutPanel2_MouseUp(object sender, MouseEventArgs e)
+        private void Window_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
