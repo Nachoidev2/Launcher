@@ -60,6 +60,10 @@ namespace Launcher
             tableLayoutPanel1.MouseMove += Window_MouseMove;
             tableLayoutPanel1.MouseUp += Window_MouseUp;
 
+            tableLayoutPanel2.MouseDown += Window_MouseDown;
+            tableLayoutPanel2.MouseMove += Window_MouseMove;
+            tableLayoutPanel2.MouseUp += Window_MouseUp;
+
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
 
