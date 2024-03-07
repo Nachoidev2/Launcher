@@ -66,13 +66,13 @@
             this.tableLayoutPanel1.Controls.Add(this.Cover, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.NameLauncher, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.4031F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.5969F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 443);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(801, 453);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel2
@@ -83,7 +83,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.789157F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.Close, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.button4, 3, 0);
@@ -93,7 +93,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.4138F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.58621F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(394, 39);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(402, 39);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // Close
@@ -103,7 +103,7 @@
             this.Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Close.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Close.Image = global::Launcher.Properties.Resources.x1;
-            this.Close.Location = new System.Drawing.Point(335, 3);
+            this.Close.Location = new System.Drawing.Point(342, 3);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(53, 33);
             this.Close.TabIndex = 0;
@@ -115,7 +115,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = global::Launcher.Properties.Resources.maximize_21;
-            this.button4.Location = new System.Drawing.Point(275, 3);
+            this.button4.Location = new System.Drawing.Point(282, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(54, 33);
             this.button4.TabIndex = 1;
@@ -127,7 +127,7 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = global::Launcher.Properties.Resources.minus;
-            this.button5.Location = new System.Drawing.Point(215, 3);
+            this.button5.Location = new System.Drawing.Point(222, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(54, 33);
             this.button5.TabIndex = 2;
