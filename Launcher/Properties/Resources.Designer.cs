@@ -63,6 +63,16 @@ namespace Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1fa5ba0b_c2e1_42f5_ac5f_e091d5cf0ef9 {
+            get {
+                object obj = ResourceManager.GetObject("_1fa5ba0b-c2e1-42f5-ac5f-e091d5cf0ef9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap maximize {
             get {
                 object obj = ResourceManager.GetObject("maximize", resourceCulture);

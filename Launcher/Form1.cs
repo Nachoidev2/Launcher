@@ -73,6 +73,7 @@ namespace Launcher
             };
             fadeTimer.Tick += FadeTimer_Tick;
             //fadeTimer.Start();
+
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -459,5 +460,6 @@ namespace Launcher
                     fadeIn = true; // Completa el fade out, puedes parar el timer o reiniciar un fade in
             }
         }
+
     }
 }
