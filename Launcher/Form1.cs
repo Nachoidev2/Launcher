@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 using System.Security.Cryptography;
+using craftersmine.SteamGridDBNet;
 
 namespace Launcher
 {
@@ -19,6 +20,7 @@ namespace Launcher
         private ToolStripDropDownMenu toolStripDropDownMenu;
         private Timer fadeTimer;
         private bool fadeIn = true;
+        private SteamGridDb sgdb = new SteamGridDb("b31e5f6ab66df37f2d0c8613d70413f9");
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace Launcher
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Cover.Dock = DockStyle.Fill;
             listBox1.Dock = DockStyle.Fill;
             Add.Dock = DockStyle.Fill;
