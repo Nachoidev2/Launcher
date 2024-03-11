@@ -36,12 +36,12 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.Cover = new System.Windows.Forms.PictureBox();
             this.Play = new System.Windows.Forms.Button();
+            this.Description = new System.Windows.Forms.Label();
             this.NameLauncher = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Close = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.Description = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -139,8 +139,8 @@
             this.tableLayoutPanel4.Location = new System.Drawing.Point(277, 44);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.28134F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.71866F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.14484F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.85515F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(517, 402);
             this.tableLayoutPanel4.TabIndex = 6;
@@ -149,7 +149,7 @@
             // 
             this.Cover.Location = new System.Drawing.Point(3, 3);
             this.Cover.Name = "Cover";
-            this.Cover.Size = new System.Drawing.Size(511, 214);
+            this.Cover.Size = new System.Drawing.Size(511, 253);
             this.Cover.TabIndex = 3;
             this.Cover.TabStop = false;
             this.Cover.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -168,6 +168,15 @@
             this.Play.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.Play.UseVisualStyleBackColor = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
+            // 
+            // Description
+            // 
+            this.Description.AutoSize = true;
+            this.Description.Location = new System.Drawing.Point(3, 259);
+            this.Description.Name = "Description";
+            this.Description.Size = new System.Drawing.Size(44, 16);
+            this.Description.TabIndex = 4;
+            this.Description.Text = "label1";
             // 
             // NameLauncher
             // 
@@ -241,15 +250,6 @@
             this.button5.TabIndex = 2;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Minimized);
-            // 
-            // Description label
-            // 
-            this.Description.AutoSize = true;
-            this.Description.Location = new System.Drawing.Point(3, 220);
-            this.Description.Name = "label1";
-            this.Description.Size = new System.Drawing.Size(44, 16);
-            this.Description.TabIndex = 4;
-            this.Description.Text = "label1";
             // 
             // Form1
             // 
