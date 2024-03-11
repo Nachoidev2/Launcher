@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Security.Cryptography;
 using craftersmine.SteamGridDBNet;
+using craftersmine.SteamGridDBNet.Exceptions;
 
 namespace Launcher
 {
@@ -90,24 +91,75 @@ namespace Launcher
                     var Reference_Game = new Game
                     {
                         Path = fileDialog.FileName,
-                        Name = System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)
+                        //Name = System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)
                     };
 
-                    // Dialog Cover
-                    using (var imgDialog = new OpenFileDialog())
+                    string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
+
+                    SearchGame("System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)");
+                    if (!string.IsNullOrEmpty(enteredName))
                     {
-                        imgDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
-                        if (imgDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            Reference_Game.Cover = imgDialog.FileName;
-                        }
+                        // Asigna el nombre al juego
+                        Reference_Game.Name = enteredName;
+
+                        listBox1.Items.Add(Reference_Game);
+
+                        GameSelect(false);
+                        SaveGames();
                     }
-
-                    listBox1.Items.Add(Reference_Game);
-
-                    GameSelect(false);
-                    SaveGames();
                 }
+            }
+        }
+
+        private string OpenPromptDialog(string text, string caption)
+        {
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            if (prompt.ShowDialog() == DialogResult.OK)
+            {
+                // Retorna el texto ingresado por el usuario
+                return textBox.Text;
+            }
+
+            // En caso de cancelar, retorna una cadena vacía
+            return string.Empty;
+        }
+
+        private async void SearchGame(string searchTerm)
+        {
+            try
+            {
+                SteamGridDbGame[] games = await sgdb.SearchForGamesAsync(searchTerm);
+
+                // Aquí puedes manejar los resultados según sea necesario, como mostrarlos en una lista o realizar alguna acción con ellos.
+            }
+            catch (SteamGridDbException ex)
+            {
+                // Manejar excepciones generales de SteamGridDB
+                Console.WriteLine($"Error de SteamGridDB: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar otras excepciones
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
