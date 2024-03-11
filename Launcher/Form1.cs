@@ -81,7 +81,7 @@ namespace Launcher
 
         }
 
-        private void Add_Click(object sender, EventArgs e)
+        private async void Add_Click(object sender, EventArgs e)
         {
             using (var fileDialog = new OpenFileDialog())
             {
@@ -101,6 +101,12 @@ namespace Launcher
                     {
                         // Asigna el nombre al juego
                         Reference_Game.Name = enteredName;
+                        SteamGridDbGrid[] grids = await SearchGame(enteredName);
+                        if (grids != null)
+                        {
+                            Reference_Game.Cover = grids[0].FullImageUrl;
+                            Cover.ImageLocation = Reference_Game.Cover;
+                        }
 
                         listBox1.Items.Add(Reference_Game);
 
@@ -143,24 +149,62 @@ namespace Launcher
             return string.Empty;
         }
 
-        private async void SearchGame(string searchTerm)
+        private async Task<SteamGridDbGrid[]> SearchGame(string searchTerm)
         {
+            SteamGridDbGrid[] grids = null;
+
             try
             {
                 SteamGridDbGame[] games = await sgdb.SearchForGamesAsync(searchTerm);
 
-                // Aquí puedes manejar los resultados según sea necesario, como mostrarlos en una lista o realizar alguna acción con ellos.
+
+                if (games != null && games.Length > 0)
+                {
+                    // Manejar los juegos encontrados, por ejemplo, seleccionar el primero o permitir que el usuario elija
+                    var firstGame = games[0]; // Solo un ejemplo, ajusta según sea necesario
+                    var ID = firstGame.Id;
+
+                    grids = await sgdb.GetGridsByGameIdAsync(ID);
+                    if (grids != null && grids.Length > 0)
+                    {
+                        return grids;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron grids para el juego seleccionado.");
+                    }
+                }
+                else
+                {
+                    // No se encontraron juegos
+                    MessageBox.Show("No se encontraron juegos para el término de búsqueda proporcionado.");
+                }
+            }
+            catch (SteamGridDbBadRequestException ex)
+            {
+                // Manejar una solicitud mal formada, potencialmente un error de API o un bug en la biblioteca
+            }
+            catch (SteamGridDbUnauthorizedException ex)
+            {
+                // Manejar error de autenticación, como una clave de API faltante, inválida o expirada
+            }
+            catch (SteamGridDbNotFoundException ex)
+            {
+                // Manejar el caso en que no se encuentran juegos con los parámetros especificados
+            }
+            catch (SteamGridDbForbiddenException ex)
+            {
+                // Manejar el acceso prohibido, por ejemplo, intentar eliminar un objeto que no posees
+            }
+            catch (SteamGridDbImageException ex)
+            {
+                // Manejar errores relacionados con el acceso a imágenes
             }
             catch (SteamGridDbException ex)
             {
-                // Manejar excepciones generales de SteamGridDB
-                Console.WriteLine($"Error de SteamGridDB: {ex.Message}");
+                // Manejar cualquier otro error genérico al acceder a la API de SteamGridDB
             }
-            catch (Exception ex)
-            {
-                // Manejar otras excepciones
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            return new SteamGridDbGrid[0];
         }
 
         //Play Game
