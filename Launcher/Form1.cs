@@ -13,6 +13,7 @@ using System.IO;
 using System.Security.Cryptography;
 using craftersmine.SteamGridDBNet;
 using craftersmine.SteamGridDBNet.Exceptions;
+using System.Net;
 
 namespace Launcher
 {
@@ -104,8 +105,27 @@ namespace Launcher
                         SteamGridDbGrid[] grids = await SearchGame(enteredName);
                         if (grids != null)
                         {
-                            Reference_Game.Cover = grids[0].FullImageUrl;
-                            Cover.ImageLocation = Reference_Game.Cover;
+                            //Download Image
+                            using (WebClient webClient = new WebClient())
+                            {
+                                string imageUrl = grids[0].FullImageUrl;
+                                byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
+
+                                // Check Extension
+                                string imageExtension = Path.GetExtension(imageUrl);
+                                string imageFileName = $"{enteredName}_cover{imageExtension}";
+
+                                //Save local
+                                string dataFolderPath = "Data";
+                                string coversFolderPath = Path.Combine(dataFolderPath, "Covers");
+                                string imagePath = Path.Combine(coversFolderPath, imageFileName);
+
+                                // Guardar la imagen localmente
+                                File.WriteAllBytes(imagePath, imageData);
+
+                                Reference_Game.Cover = imagePath;
+                                Cover.ImageLocation = Reference_Game.Cover;
+                            }
                         }
 
                         listBox1.Items.Add(Reference_Game);
@@ -405,17 +425,17 @@ namespace Launcher
 
             // deserialize the list to json and save in a file
             string json = JsonConvert.SerializeObject(games, Formatting.Indented);
-            File.WriteAllText("games.json", json);
+            File.WriteAllText("./Data/games.json", json);
             SortList(true);
         }
 
         private void LoadGames()
         {
             // Check Exist json file
-            if (File.Exists("games.json"))
+            if (File.Exists("./Data/games.json"))
             {
                 // Read content of file and deserialize to a list of games
-                string json = File.ReadAllText("games.json");
+                string json = File.ReadAllText("./Data/games.json");
                 List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
 
                 // add games to listBox1
