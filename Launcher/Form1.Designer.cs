@@ -41,6 +41,7 @@
             this.Close = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.Description = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -133,12 +134,14 @@
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Controls.Add(this.Cover, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Play, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.Play, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.Description, 0, 1);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(277, 44);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.8587F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.1413F));
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.28134F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.71866F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(517, 402);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
@@ -146,7 +149,7 @@
             // 
             this.Cover.Location = new System.Drawing.Point(3, 3);
             this.Cover.Name = "Cover";
-            this.Cover.Size = new System.Drawing.Size(511, 351);
+            this.Cover.Size = new System.Drawing.Size(511, 214);
             this.Cover.TabIndex = 3;
             this.Cover.TabStop = false;
             this.Cover.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -156,9 +159,9 @@
             this.Play.BackColor = System.Drawing.Color.Black;
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Image = global::Launcher.Properties.Resources.play;
-            this.Play.Location = new System.Drawing.Point(3, 360);
+            this.Play.Location = new System.Drawing.Point(3, 362);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(511, 39);
+            this.Play.Size = new System.Drawing.Size(511, 37);
             this.Play.TabIndex = 2;
             this.Play.Text = "Play";
             this.Play.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -239,6 +242,15 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Minimized);
             // 
+            // Description label
+            // 
+            this.Description.AutoSize = true;
+            this.Description.Location = new System.Drawing.Point(3, 220);
+            this.Description.Name = "label1";
+            this.Description.Size = new System.Drawing.Size(44, 16);
+            this.Description.TabIndex = 4;
+            this.Description.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,6 +266,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Cover)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -275,6 +288,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox Cover;
         private System.Windows.Forms.Button Play;
+        private System.Windows.Forms.Label Description;
     }
     }
 

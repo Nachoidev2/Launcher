@@ -441,7 +441,7 @@ namespace Launcher
         //show and hide play button event
         private void GameSelect(bool IsSelect)
         {
-            Play.Visible = IsSelect;
+            Play.Visible = Description.Visible = IsSelect;
             if (IsSelect == true && listBox1.SelectedItem is Game Reference_Game)
             {
                 Cover.ImageLocation = Reference_Game.Cover;
