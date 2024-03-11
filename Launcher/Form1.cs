@@ -36,10 +36,12 @@ namespace Launcher
             tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Cover.Dock = DockStyle.Fill;
+
             listBox1.Dock = DockStyle.Fill;
             Add.Dock = DockStyle.Fill;
             Play.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
+
 
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
@@ -73,6 +75,8 @@ namespace Launcher
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
 
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
             fadeTimer = new Timer
             {
                 Interval = 50, // Ajusta para controlar la velocidad del fade
@@ -97,12 +101,13 @@ namespace Launcher
 
                     string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
 
-                    //SearchGame("System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)");
                     if (!string.IsNullOrEmpty(enteredName))
                     {
                         // Asigna el nombre al juego
                         Reference_Game.Name = enteredName;
-                        SteamGridDbGrid[] grids = await SearchGame(enteredName);
+
+                        (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGame(enteredName);
+
                         if (grids != null)
                         {
                             //Download Image
@@ -115,16 +120,41 @@ namespace Launcher
                                 string imageExtension = Path.GetExtension(imageUrl);
                                 string imageFileName = $"{enteredName}_cover{imageExtension}";
 
-                                //Save local
+                                // Rename File
                                 string dataFolderPath = "Data";
                                 string coversFolderPath = Path.Combine(dataFolderPath, "Covers");
                                 string imagePath = Path.Combine(coversFolderPath, imageFileName);
 
-                                // Guardar la imagen localmente
+                                // Save local
                                 File.WriteAllBytes(imagePath, imageData);
 
                                 Reference_Game.Cover = imagePath;
-                                Cover.ImageLocation = Reference_Game.Cover;
+
+                            }
+                        }
+
+                        if (heroes != null)
+                        {
+                            //Download Image
+                            using (WebClient webClient = new WebClient())
+                            {
+                                string imageUrl = heroes[0].FullImageUrl;
+                                byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
+
+                                // Check Extension
+                                string imageExtension = Path.GetExtension(imageUrl);
+                                string imageFileName = $"{enteredName}_Background{imageExtension}";
+
+                                // Rename File
+                                string dataFolderPath = "Data";
+                                string coversFolderPath = Path.Combine(dataFolderPath, "Backgrounds");
+                                string imagePath = Path.Combine(coversFolderPath, imageFileName);
+
+                                // Save local
+                                File.WriteAllBytes(imagePath, imageData);
+
+                                Reference_Game.Background = imagePath;
+
                             }
                         }
 
@@ -169,9 +199,10 @@ namespace Launcher
             return string.Empty;
         }
 
-        private async Task<SteamGridDbGrid[]> SearchGame(string searchTerm)
+        private async Task<(SteamGridDbGrid[], SteamGridDbHero[])> SearchGame(string searchTerm)
         {
             SteamGridDbGrid[] grids = null;
+            SteamGridDbHero[] heroes = null;
 
             try
             {
@@ -185,9 +216,11 @@ namespace Launcher
                     var ID = firstGame.Id;
 
                     grids = await sgdb.GetGridsByGameIdAsync(ID);
+                    heroes = await sgdb.GetHeroesByGameIdAsync(ID);
+
                     if (grids != null && grids.Length > 0)
                     {
-                        return grids;
+                        return (grids, heroes);
                     }
                     else
                     {
@@ -224,7 +257,7 @@ namespace Launcher
             {
                 // Manejar cualquier otro error genérico al acceder a la API de SteamGridDB
             }
-            return new SteamGridDbGrid[0];
+            return (new SteamGridDbGrid[0], new SteamGridDbHero[0]);
         }
 
         //Play Game
@@ -406,9 +439,11 @@ namespace Launcher
             if (IsSelect == true && listBox1.SelectedItem is Game Reference_Game)
             {
                 Cover.ImageLocation = Reference_Game.Cover;
+                this.BackgroundImage = Image.FromFile(Reference_Game.Background);
             }
             else
             {
+                Cover.ImageLocation = null;
                 Cover.ImageLocation = null;
             }
         }
