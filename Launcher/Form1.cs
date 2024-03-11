@@ -444,7 +444,7 @@ namespace Launcher
             else
             {
                 Cover.ImageLocation = null;
-                Cover.ImageLocation = null;
+                this.BackgroundImage = null;
             }
         }
 
