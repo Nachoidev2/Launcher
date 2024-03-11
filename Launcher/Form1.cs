@@ -96,7 +96,7 @@ namespace Launcher
 
                     string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
 
-                    SearchGame("System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)");
+                    //SearchGame("System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)");
                     if (!string.IsNullOrEmpty(enteredName))
                     {
                         // Asigna el nombre al juego
@@ -223,11 +223,6 @@ namespace Launcher
             if (e.KeyCode == Keys.F2)
             {
                 Edit();
-            }
-            // Finish edit on Enter key
-            else if (e.KeyCode == Keys.Enter)
-            {
-                FinalizarEdicionNombre(listBox1.SelectedIndex, listBox1.Text);
             }
         }
 
@@ -465,38 +460,19 @@ namespace Launcher
         // edit
         private void Edit()
         {
-            if (listBox1.SelectedItem != null)
+            if (listBox1.SelectedItem != null && listBox1.SelectedItem is Game Reference_Game)
             {
-                // Obtener el índice y el nombre actual del item seleccionado
-                int selectedIndex = listBox1.SelectedIndex;
-                string currentName = listBox1.SelectedItem.ToString();
-
                 // Activar el modo de edición en el ListBox para permitir la modificación directa
-                listBox1.SetSelected(selectedIndex, false);
-                listBox1.Enabled = false;
+                string enteredName = OpenPromptDialog("Name Game", "Rename");
+                if (!string.IsNullOrEmpty(enteredName))
+                {
+                    // Asigna el nombre al juego
+                    Reference_Game.Name = enteredName;
 
-                // Iniciar la edición directa del nombre del item seleccionado en el ListBox
-                listBox1.SelectedIndex = selectedIndex;
-                listBox1.SelectionMode = SelectionMode.One;
-
-                // Crear un TextBox temporal para editar el nombre
-                TextBox textBox = new TextBox();
-                textBox.Parent = listBox1;
-                textBox.Location = listBox1.GetItemRectangle(selectedIndex).Location;
-                textBox.Size = listBox1.GetItemRectangle(selectedIndex).Size;
-                textBox.Text = currentName;
-                textBox.SelectAll();
-                textBox.Focus();
+                    //GameSelect(false);
+                    SaveGames();
+                }
             }
-        }
-        private void FinalizarEdicionNombre(int selectedIndex, string newName)
-        {
-            // Actualizar el nombre del item en el ListBox y en la lista de juegos
-            listBox1.Items[selectedIndex] = newName;
-
-            // Finalizar la edición y volver a activar el ListBox
-            listBox1.Enabled = true;
-            listBox1.SelectionMode = SelectionMode.MultiSimple;
         }
 
         private void FadeTimer_Tick(object sender, EventArgs e)
