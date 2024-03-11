@@ -347,18 +347,21 @@ namespace Launcher
 
             // Create elements
             ToolStripMenuItem menuItem1 = new ToolStripMenuItem("Rename");
-            ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Change Cover");
-            ToolStripMenuItem menuItem3 = new ToolStripMenuItem("Delete");
+            ToolStripMenuItem menuItem2 = new ToolStripMenuItem("Change Path");
+            ToolStripMenuItem menuItem3 = new ToolStripMenuItem("Change Cover");
+            ToolStripMenuItem menuItem4 = new ToolStripMenuItem("Delete");
 
             // Adds Events to Buttons
             menuItem1.Click += (sender, e) => MenuItem_Click(sender, e, "Rename");
-            menuItem2.Click += (sender, e) => MenuItem_Click(sender, e, "Change Cover");
-            menuItem3.Click += (sender, e) => MenuItem_Click(sender, e, "Delete");
+            menuItem2.Click += (sender, e) => MenuItem_Click(sender, e, "Change Path");
+            menuItem3.Click += (sender, e) => MenuItem_Click(sender, e, "Change Cover");
+            menuItem4.Click += (sender, e) => MenuItem_Click(sender, e, "Delete");
 
             // add elements to the float menu
             toolStripDropDownMenu.Items.Add(menuItem1);
             toolStripDropDownMenu.Items.Add(menuItem2);
             toolStripDropDownMenu.Items.Add(menuItem3);
+            toolStripDropDownMenu.Items.Add(menuItem4);
         }
 
         // Class Custom menu
@@ -424,6 +427,9 @@ namespace Launcher
                     case "Delete":
                         Delete();
                         GameSelect(false);
+                        break;
+                    case "Change Path":
+
                         break;
                     default:
                         break;
