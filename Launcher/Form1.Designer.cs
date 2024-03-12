@@ -168,6 +168,7 @@
             // 
             this.Play.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.Play.BackColor = System.Drawing.Color.ForestGreen;
+            this.Play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Image = global::Launcher.Properties.Resources.play;
             this.Play.Location = new System.Drawing.Point(91, 592);
@@ -236,6 +237,7 @@
             // 
             this.Close.AutoSize = true;
             this.Close.BackColor = System.Drawing.Color.Transparent;
+            this.Close.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Close.FlatAppearance.BorderSize = 0;
             this.Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Close.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -251,6 +253,7 @@
             // button4
             // 
             this.button4.AutoSize = true;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = global::Launcher.Properties.Resources.maximize_21;
@@ -265,6 +268,7 @@
             // button5
             // 
             this.button5.AutoSize = true;
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = global::Launcher.Properties.Resources.minus;
