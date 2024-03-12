@@ -77,6 +77,9 @@ namespace Launcher
 
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
+            listBox1.MouseMove += listBox1_MouseMove;
+            listBox1.MouseLeave += listBox1_MouseLeave;
+
         }
 
         private async void Add_Click(object sender, EventArgs e)
@@ -381,6 +384,26 @@ namespace Launcher
                 e.TextFont = new Font("Arial", 9, FontStyle.Bold);
                 base.OnRenderItemText(e);
             }
+        }
+
+        // set cursor on mouse over item listbox
+        private void listBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            int index = listBox1.IndexFromPoint(e.Location);
+
+            if (index >= 0)
+            {
+                listBox1.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                listBox1.Cursor = Cursors.Default;
+            }
+        }
+
+        private void listBox1_MouseLeave(object sender, EventArgs e)
+        {
+            listBox1.Cursor = Cursors.Default;
         }
 
         // open submenu
