@@ -77,13 +77,6 @@ namespace Launcher
 
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            fadeTimer = new Timer
-            {
-                Interval = 50, // Ajusta para controlar la velocidad del fade
-            };
-            fadeTimer.Tick += FadeTimer_Tick;
-            //fadeTimer.Start();
-
         }
 
         private async void Add_Click(object sender, EventArgs e)
@@ -579,24 +572,5 @@ namespace Launcher
                 }
             }
         }
-
-        private void FadeTimer_Tick(object sender, EventArgs e)
-        {
-            if (fadeIn)
-            {
-                if (this.Opacity < 1)
-                    this.Opacity += 0.05; // Aumenta la opacidad
-                else
-                    fadeIn = false; // Completa el fade in, puedes parar el timer o iniciar un fade out
-            }
-            else
-            {
-                if (this.Opacity > 0)
-                    this.Opacity -= 0.05; // Disminuye la opacidad
-                else
-                    fadeIn = true; // Completa el fade out, puedes parar el timer o reiniciar un fade in
-            }
-        }
-
     }
 }
