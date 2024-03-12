@@ -39,7 +39,7 @@ namespace Launcher
 
             listBox1.Dock = DockStyle.Fill;
             Add.Dock = DockStyle.Fill;
-            Play.Dock = DockStyle.Fill;
+            //Play.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
 

@@ -150,7 +150,7 @@
             this.tableLayoutPanel4.RowCount = 3;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.14484F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.85515F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 61F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(519, 653);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
@@ -166,13 +166,14 @@
             // 
             // Play
             // 
+            this.Play.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.Play.BackColor = System.Drawing.Color.ForestGreen;
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Image = global::Launcher.Properties.Resources.play;
-            this.Play.Location = new System.Drawing.Point(4, 611);
+            this.Play.Location = new System.Drawing.Point(91, 592);
             this.Play.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(511, 37);
+            this.Play.Size = new System.Drawing.Size(336, 58);
             this.Play.TabIndex = 2;
             this.Play.Text = "Play";
             this.Play.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -183,7 +184,7 @@
             // Description
             // 
             this.Description.AutoSize = true;
-            this.Description.Location = new System.Drawing.Point(4, 439);
+            this.Description.Location = new System.Drawing.Point(4, 426);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(44, 16);
             this.Description.TabIndex = 4;
@@ -197,12 +198,14 @@
             this.NameLauncher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameLauncher.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLauncher.ForeColor = System.Drawing.SystemColors.Window;
+            this.NameLauncher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.NameLauncher.ImageKey = "(none)";
             this.NameLauncher.Location = new System.Drawing.Point(3, 0);
             this.NameLauncher.Name = "NameLauncher";
             this.NameLauncher.Size = new System.Drawing.Size(434, 64);
             this.NameLauncher.TabIndex = 5;
             this.NameLauncher.Text = "Launcher";
-            this.NameLauncher.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.NameLauncher.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel2
             // 
