@@ -30,7 +30,6 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.Add = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -78,33 +77,17 @@
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.Add, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.listBox1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 66);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(269, 653);
             this.tableLayoutPanel3.TabIndex = 4;
-            // 
-            // Add
-            // 
-            this.Add.BackColor = System.Drawing.Color.Black;
-            this.Add.Image = global::Launcher.Properties.Resources.plus;
-            this.Add.Location = new System.Drawing.Point(3, 612);
-            this.Add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(261, 39);
-            this.Add.TabIndex = 0;
-            this.Add.Text = "Add";
-            this.Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Add.UseVisualStyleBackColor = false;
-            this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
             // listBox1
             // 
@@ -115,21 +98,24 @@
             this.listBox1.ForeColor = System.Drawing.SystemColors.Window;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(3, 28);
+            this.listBox1.Location = new System.Drawing.Point(3, 32);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
             this.listBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listBox1.Size = new System.Drawing.Size(263, 580);
+            this.listBox1.Size = new System.Drawing.Size(263, 612);
             this.listBox1.TabIndex = 1;
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.Window;
             this.textBox1.Location = new System.Drawing.Point(3, 2);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(263, 22);
+            this.textBox1.Size = new System.Drawing.Size(263, 26);
             this.textBox1.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -185,9 +171,11 @@
             // Description
             // 
             this.Description.AutoSize = true;
+            this.Description.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Description.Location = new System.Drawing.Point(4, 426);
             this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(44, 16);
+            this.Description.Size = new System.Drawing.Size(511, 163);
             this.Description.TabIndex = 4;
             this.Description.Text = "label1";
             // 
@@ -197,7 +185,7 @@
             this.NameLauncher.BackColor = System.Drawing.Color.Transparent;
             this.NameLauncher.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.NameLauncher.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameLauncher.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameLauncher.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLauncher.ForeColor = System.Drawing.SystemColors.Window;
             this.NameLauncher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.NameLauncher.ImageKey = "(none)";
@@ -207,6 +195,7 @@
             this.NameLauncher.TabIndex = 5;
             this.NameLauncher.Text = "Launcher";
             this.NameLauncher.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.NameLauncher.Click += new System.EventHandler(this.Add_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -305,8 +294,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Add;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

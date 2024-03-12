@@ -38,14 +38,12 @@ namespace Launcher
             Cover.Dock = DockStyle.Fill;
 
             listBox1.Dock = DockStyle.Fill;
-            Add.Dock = DockStyle.Fill;
             //Play.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
 
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
-            Add.Font = new Font(Add.Font.FontFamily, 16, FontStyle.Bold);
             Play.Font = new Font(Play.Font.FontFamily, 16, FontStyle.Bold);
 
             //Disable Default Border Windows
