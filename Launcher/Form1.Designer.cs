@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.908686F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.09132F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(797, 449);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 721);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -80,20 +80,20 @@
             this.tableLayoutPanel3.Controls.Add(this.Add, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.listBox1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.textBox1, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 42);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 67);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(268, 404);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(268, 651);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // Add
             // 
             this.Add.BackColor = System.Drawing.Color.Black;
             this.Add.Image = global::Launcher.Properties.Resources.plus;
-            this.Add.Location = new System.Drawing.Point(3, 362);
+            this.Add.Location = new System.Drawing.Point(3, 609);
             this.Add.Name = "Add";
             this.Add.Size = new System.Drawing.Size(262, 39);
             this.Add.TabIndex = 0;
@@ -114,7 +114,7 @@
             this.listBox1.Location = new System.Drawing.Point(3, 31);
             this.listBox1.Name = "listBox1";
             this.listBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listBox1.Size = new System.Drawing.Size(262, 324);
+            this.listBox1.Size = new System.Drawing.Size(262, 564);
             this.listBox1.TabIndex = 1;
             // 
             // textBox1
@@ -136,13 +136,13 @@
             this.tableLayoutPanel4.Controls.Add(this.Cover, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.Play, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.Description, 0, 1);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(277, 42);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(443, 67);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.14484F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.85515F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(517, 404);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(517, 651);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
             // Cover
@@ -159,7 +159,7 @@
             this.Play.BackColor = System.Drawing.Color.Black;
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Image = global::Launcher.Properties.Resources.play;
-            this.Play.Location = new System.Drawing.Point(3, 364);
+            this.Play.Location = new System.Drawing.Point(3, 611);
             this.Play.Name = "Play";
             this.Play.Size = new System.Drawing.Size(511, 37);
             this.Play.TabIndex = 2;
@@ -172,7 +172,7 @@
             // Description
             // 
             this.Description.AutoSize = true;
-            this.Description.Location = new System.Drawing.Point(3, 261);
+            this.Description.Location = new System.Drawing.Point(3, 439);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(44, 16);
             this.Description.TabIndex = 4;
@@ -186,7 +186,7 @@
             this.NameLauncher.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLauncher.Location = new System.Drawing.Point(3, 0);
             this.NameLauncher.Name = "NameLauncher";
-            this.NameLauncher.Size = new System.Drawing.Size(268, 39);
+            this.NameLauncher.Size = new System.Drawing.Size(434, 64);
             this.NameLauncher.TabIndex = 5;
             this.NameLauncher.Text = "Launcher";
             this.NameLauncher.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -205,12 +205,12 @@
             this.tableLayoutPanel2.Controls.Add(this.Close, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.button4, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.button5, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(277, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(443, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.4138F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.58621F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(183, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(183, 36);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // Close
@@ -223,7 +223,7 @@
             this.Close.Image = global::Launcher.Properties.Resources.x1;
             this.Close.Location = new System.Drawing.Point(123, 3);
             this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(53, 27);
+            this.Close.Size = new System.Drawing.Size(53, 30);
             this.Close.TabIndex = 0;
             this.Close.UseVisualStyleBackColor = false;
             this.Close.Click += new System.EventHandler(this.Quit);
@@ -236,7 +236,7 @@
             this.button4.Image = global::Launcher.Properties.Resources.maximize_21;
             this.button4.Location = new System.Drawing.Point(63, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(54, 27);
+            this.button4.Size = new System.Drawing.Size(54, 30);
             this.button4.TabIndex = 1;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Maximize);
@@ -249,7 +249,7 @@
             this.button5.Image = global::Launcher.Properties.Resources.minus;
             this.button5.Location = new System.Drawing.Point(3, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(54, 27);
+            this.button5.Size = new System.Drawing.Size(54, 30);
             this.button5.TabIndex = 2;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Minimized);
