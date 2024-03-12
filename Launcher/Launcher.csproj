@@ -104,6 +104,12 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgramList.Designer.cs">
+      <DependentUpon>ProgramList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
