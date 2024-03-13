@@ -40,7 +40,6 @@ namespace Launcher
             Cover.Dock = DockStyle.Fill;
 
             listBox1.Dock = DockStyle.Fill;
-            //Play.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
 
@@ -101,19 +100,19 @@ namespace Launcher
             Reference_Game.Name = enteredName;
 
             // Search the game for get Grids and Heroes
-            (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGame(enteredName);
+            (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGameManager.SearchGameAsync(enteredName);
 
             // Processing Grids if enable
             if (grids != null && grids.Length > 0)
             {
-                string coverPath = await DownloadAndSaveImageAsync(grids[0].FullImageUrl, enteredName, "Covers");
+                string coverPath = await Downloader.DownloadAndSaveImageAsync(grids[0].FullImageUrl, enteredName, "Covers");
                 Reference_Game.Cover = coverPath;
             }
 
             // Processing Heroes if enable
             if (heroes != null && heroes.Length > 0)
             {
-                string backgroundPath = await DownloadAndSaveImageAsync(heroes[0].FullImageUrl, enteredName, "Backgrounds");
+                string backgroundPath = await Downloader.DownloadAndSaveImageAsync(heroes[0].FullImageUrl, enteredName, "Backgrounds");
                 Reference_Game.Background = backgroundPath;
             }
 
@@ -138,24 +137,6 @@ namespace Launcher
             return null;
         }
 
-        // download
-        private async Task<string> DownloadAndSaveImageAsync(string imageUrl, string namePrefix, string subFolder, string dataFolder = "Data")
-        {
-            using (var httpClient = new HttpClient())
-            {
-                string imageExtension = Path.GetExtension(imageUrl);
-                string imageFileName = $"{namePrefix}_{subFolder.ToLower()}{imageExtension}";
-                string folderPath = Path.Combine(dataFolder, subFolder);
-                string imagePath = Path.Combine(folderPath, imageFileName);
-
-                if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-
-                byte[] imageData = await httpClient.GetByteArrayAsync(new Uri(imageUrl));
-                File.WriteAllBytes(imagePath, imageData);
-
-                return imagePath;
-            }
-        }
         private string OpenPromptDialog(string text, string caption)
         {
             Form prompt = new Form()
@@ -186,67 +167,6 @@ namespace Launcher
 
             // En caso de cancelar, retorna una cadena vacía
             return string.Empty;
-        }
-
-        private async Task<(SteamGridDbGrid[], SteamGridDbHero[])> SearchGame(string searchTerm)
-        {
-            SteamGridDbGrid[] grids = null;
-            SteamGridDbHero[] heroes = null;
-
-            try
-            {
-                SteamGridDbGame[] games = await sgdb.SearchForGamesAsync(searchTerm);
-
-
-                if (games != null && games.Length > 0)
-                {
-                    // Manejar los juegos encontrados, por ejemplo, seleccionar el primero o permitir que el usuario elija
-                    var firstGame = games[0]; // Solo un ejemplo, ajusta según sea necesario
-                    var ID = firstGame.Id;
-
-                    grids = await sgdb.GetGridsByGameIdAsync(ID);
-                    heroes = await sgdb.GetHeroesByGameIdAsync(ID);
-
-                    if (grids != null && grids.Length > 0)
-                    {
-                        return (grids, heroes);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron grids para el juego seleccionado.");
-                    }
-                }
-                else
-                {
-                    // No se encontraron juegos
-                    MessageBox.Show("No se encontraron juegos para el término de búsqueda proporcionado.");
-                }
-            }
-            catch (SteamGridDbBadRequestException ex)
-            {
-                // Manejar una solicitud mal formada, potencialmente un error de API o un bug en la biblioteca
-            }
-            catch (SteamGridDbUnauthorizedException ex)
-            {
-                // Manejar error de autenticación, como una clave de API faltante, inválida o expirada
-            }
-            catch (SteamGridDbNotFoundException ex)
-            {
-                // Manejar el caso en que no se encuentran juegos con los parámetros especificados
-            }
-            catch (SteamGridDbForbiddenException ex)
-            {
-                // Manejar el acceso prohibido, por ejemplo, intentar eliminar un objeto que no posees
-            }
-            catch (SteamGridDbImageException ex)
-            {
-                // Manejar errores relacionados con el acceso a imágenes
-            }
-            catch (SteamGridDbException ex)
-            {
-                // Manejar cualquier otro error genérico al acceder a la API de SteamGridDB
-            }
-            return (new SteamGridDbGrid[0], new SteamGridDbHero[0]);
         }
 
         //Play Game
