@@ -84,86 +84,86 @@ namespace Launcher
 
         private async void Add_Click(object sender, EventArgs e)
         {
+            // Primero seleccionamos el archivo
+            string selectedFilePath = OpenFileDialog();
+            if (selectedFilePath == null) return;
+
+            // Crear la instancia de Game con el Path seleccionado
+            var Reference_Game = new Game
+            {
+                Path = selectedFilePath // Aquí se corrigió el error de sintaxis quitando el punto y coma
+            };
+
+            // Luego pedimos el nombre del juego
+            string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
+            if (string.IsNullOrEmpty(enteredName)) return;
+
+            // Asignamos el nombre al juego
+            Reference_Game.Name = enteredName;
+
+            // Buscamos el juego para obtener grids y héroes
+            (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGame(enteredName);
+
+            // Procesamiento de grids si están disponibles
+            if (grids != null && grids.Length > 0)
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    string imageUrl = grids[0].FullImageUrl;
+                    byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
+
+                    string imageExtension = Path.GetExtension(imageUrl);
+                    string imageFileName = $"{enteredName}_cover{imageExtension}";
+
+                    string dataFolderPath = "Data";
+                    string coversFolderPath = Path.Combine(dataFolderPath, "Covers");
+                    string imagePath = Path.Combine(coversFolderPath, imageFileName);
+
+                    File.WriteAllBytes(imagePath, imageData);
+                    Reference_Game.Cover = imagePath;
+                }
+            }
+
+            // Procesamiento de héroes si están disponibles
+            if (heroes != null && heroes.Length > 0)
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    string imageUrl = heroes[0].FullImageUrl;
+                    byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
+
+                    string imageExtension = Path.GetExtension(imageUrl);
+                    string imageFileName = $"{enteredName}_Background{imageExtension}";
+
+                    string dataFolderPath = "Data";
+                    string backgroundsFolderPath = Path.Combine(dataFolderPath, "Backgrounds");
+                    string imagePath = Path.Combine(backgroundsFolderPath, imageFileName);
+
+                    File.WriteAllBytes(imagePath, imageData);
+                    Reference_Game.Background = imagePath;
+                }
+            }
+
+            // Añadir el juego a la lista y actualizar UI según sea necesario
+            listBox1.Items.Add(Reference_Game);
+            GameSelect(false);
+            SaveGames();
+        }
+
+
+        // Open File Browser
+        private string OpenFileDialog()
+        {
             using (var fileDialog = new OpenFileDialog())
             {
                 fileDialog.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var Reference_Game = new Game
-                    {
-                        Path = fileDialog.FileName,
-                        //Name = System.IO.Path.GetFileNameWithoutExtension(fileDialog.FileName)
-                    };
-
-                    string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
-
-                    if (!string.IsNullOrEmpty(enteredName))
-                    {
-                        // Asigna el nombre al juego
-                        Reference_Game.Name = enteredName;
-
-                        (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGame(enteredName);
-
-                        if (grids != null)
-                        {
-                            //Download Image
-                            using (WebClient webClient = new WebClient())
-                            {
-                                string imageUrl = grids[0].FullImageUrl;
-                                byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
-
-                                // Check Extension
-                                string imageExtension = Path.GetExtension(imageUrl);
-                                string imageFileName = $"{enteredName}_cover{imageExtension}";
-
-                                // Rename File
-                                string dataFolderPath = "Data";
-                                string coversFolderPath = Path.Combine(dataFolderPath, "Covers");
-                                string imagePath = Path.Combine(coversFolderPath, imageFileName);
-
-                                // Save local
-                                File.WriteAllBytes(imagePath, imageData);
-
-                                Reference_Game.Cover = imagePath;
-
-                            }
-                        }
-
-                        if (heroes != null)
-                        {
-                            //Download Image
-                            using (WebClient webClient = new WebClient())
-                            {
-                                string imageUrl = heroes[0].FullImageUrl;
-                                byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
-
-                                // Check Extension
-                                string imageExtension = Path.GetExtension(imageUrl);
-                                string imageFileName = $"{enteredName}_Background{imageExtension}";
-
-                                // Rename File
-                                string dataFolderPath = "Data";
-                                string coversFolderPath = Path.Combine(dataFolderPath, "Backgrounds");
-                                string imagePath = Path.Combine(coversFolderPath, imageFileName);
-
-                                // Save local
-                                File.WriteAllBytes(imagePath, imageData);
-
-                                Reference_Game.Background = imagePath;
-
-                            }
-                        }
-
-                        listBox1.Items.Add(Reference_Game);
-
-                        GameSelect(false);
-                        SaveGames();
-                    }
+                    return fileDialog.FileName;
                 }
             }
+            return null;
         }
-
- 
 
         private string OpenPromptDialog(string text, string caption)
         {
@@ -462,8 +462,11 @@ namespace Launcher
             Play.Visible = Description.Visible = IsSelect;
             if (IsSelect == true && listBox1.SelectedItem is Game Reference_Game)
             {
-                Cover.ImageLocation = Reference_Game.Cover;
-                this.BackgroundImage = Image.FromFile(Reference_Game.Background);
+                if (Reference_Game.Cover != null && Reference_Game.Background != null)
+                {
+                    Cover.ImageLocation = Reference_Game.Cover;
+                    this.BackgroundImage = Image.FromFile(Reference_Game.Background);
+                }
             }
             else
             {
