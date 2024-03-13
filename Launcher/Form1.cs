@@ -263,7 +263,7 @@ namespace Launcher
         {
             if (listBox1.SelectedItem is Game Reference_Game)
             {
-                this.WindowState = FormWindowState.Minimized;
+                //this.WindowState = FormWindowState.Minimized;
                 Process.Start(Reference_Game.Path);
             }
         }
