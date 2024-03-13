@@ -286,7 +286,22 @@ namespace Launcher
                 }
             }
         }
-        
+
+        // change path
+        private void ChangePath()
+        {
+            if (listBox1.SelectedItem is Game Reference_Game)
+            {
+                // Open File Browse
+                string selectedFilePath = OpenFileDialog();
+                if (selectedFilePath == null) return;
+                // Assign path
+                Reference_Game.Path = selectedFilePath;
+                SaveGames();
+
+            }
+        }
+
         // Event if select item change
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -438,7 +453,7 @@ namespace Launcher
                         GameSelect(false);
                         break;
                     case "Change Path":
-
+                        ChangePath();
                         break;
                     default:
                         break;
