@@ -84,27 +84,25 @@ namespace Launcher
 
         private async void Add_Click(object sender, EventArgs e)
         {
-            // Primero seleccionamos el archivo
+            // Open File Browse
             string selectedFilePath = OpenFileDialog();
             if (selectedFilePath == null) return;
 
-            // Crear la instancia de Game con el Path seleccionado
-            var Reference_Game = new Game
-            {
-                Path = selectedFilePath // Aquí se corrigió el error de sintaxis quitando el punto y coma
-            };
+            // Create instance Game with Path
+            var Reference_Game = new Game();
+            // Assign path
+            Reference_Game.Path = selectedFilePath;
 
-            // Luego pedimos el nombre del juego
+            // Input Name
             string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
             if (string.IsNullOrEmpty(enteredName)) return;
-
-            // Asignamos el nombre al juego
+            // Assign name
             Reference_Game.Name = enteredName;
 
-            // Buscamos el juego para obtener grids y héroes
+            // Search the game for get Grids and Heroes
             (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGame(enteredName);
 
-            // Procesamiento de grids si están disponibles
+            // Processing Grids if enable
             if (grids != null && grids.Length > 0)
             {
                 using (WebClient webClient = new WebClient())
@@ -124,7 +122,7 @@ namespace Launcher
                 }
             }
 
-            // Procesamiento de héroes si están disponibles
+            // Processing Heroes if enable
             if (heroes != null && heroes.Length > 0)
             {
                 using (WebClient webClient = new WebClient())
@@ -144,7 +142,7 @@ namespace Launcher
                 }
             }
 
-            // Añadir el juego a la lista y actualizar UI según sea necesario
+            // add game at the list and update UI
             listBox1.Items.Add(Reference_Game);
             GameSelect(false);
             SaveGames();
