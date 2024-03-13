@@ -15,6 +15,7 @@ using craftersmine.SteamGridDBNet;
 using craftersmine.SteamGridDBNet.Exceptions;
 using System.Net;
 using Microsoft.Win32;
+using System.Net.Http;
 
 namespace Launcher
 {
@@ -105,41 +106,15 @@ namespace Launcher
             // Processing Grids if enable
             if (grids != null && grids.Length > 0)
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    string imageUrl = grids[0].FullImageUrl;
-                    byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
-
-                    string imageExtension = Path.GetExtension(imageUrl);
-                    string imageFileName = $"{enteredName}_cover{imageExtension}";
-
-                    string dataFolderPath = "Data";
-                    string coversFolderPath = Path.Combine(dataFolderPath, "Covers");
-                    string imagePath = Path.Combine(coversFolderPath, imageFileName);
-
-                    File.WriteAllBytes(imagePath, imageData);
-                    Reference_Game.Cover = imagePath;
-                }
+                string coverPath = await DownloadAndSaveImageAsync(grids[0].FullImageUrl, enteredName, "Covers");
+                Reference_Game.Cover = coverPath;
             }
 
             // Processing Heroes if enable
             if (heroes != null && heroes.Length > 0)
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    string imageUrl = heroes[0].FullImageUrl;
-                    byte[] imageData = await webClient.DownloadDataTaskAsync(new Uri(imageUrl));
-
-                    string imageExtension = Path.GetExtension(imageUrl);
-                    string imageFileName = $"{enteredName}_Background{imageExtension}";
-
-                    string dataFolderPath = "Data";
-                    string backgroundsFolderPath = Path.Combine(dataFolderPath, "Backgrounds");
-                    string imagePath = Path.Combine(backgroundsFolderPath, imageFileName);
-
-                    File.WriteAllBytes(imagePath, imageData);
-                    Reference_Game.Background = imagePath;
-                }
+                string backgroundPath = await DownloadAndSaveImageAsync(heroes[0].FullImageUrl, enteredName, "Backgrounds");
+                Reference_Game.Background = backgroundPath;
             }
 
             // add game at the list and update UI
@@ -163,6 +138,24 @@ namespace Launcher
             return null;
         }
 
+        // download
+        private async Task<string> DownloadAndSaveImageAsync(string imageUrl, string namePrefix, string subFolder, string dataFolder = "Data")
+        {
+            using (var httpClient = new HttpClient())
+            {
+                string imageExtension = Path.GetExtension(imageUrl);
+                string imageFileName = $"{namePrefix}_{subFolder.ToLower()}{imageExtension}";
+                string folderPath = Path.Combine(dataFolder, subFolder);
+                string imagePath = Path.Combine(folderPath, imageFileName);
+
+                if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
+                byte[] imageData = await httpClient.GetByteArrayAsync(new Uri(imageUrl));
+                File.WriteAllBytes(imagePath, imageData);
+
+                return imagePath;
+            }
+        }
         private string OpenPromptDialog(string text, string caption)
         {
             Form prompt = new Form()
