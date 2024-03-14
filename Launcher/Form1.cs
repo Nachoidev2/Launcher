@@ -42,6 +42,8 @@ namespace Launcher
             listBox1.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
+            this.DoubleBuffered = true;
+
 
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
