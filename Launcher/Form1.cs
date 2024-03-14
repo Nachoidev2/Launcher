@@ -42,6 +42,7 @@ namespace Launcher
             listBox1.Dock = DockStyle.Fill;
             Cover.SizeMode = PictureBoxSizeMode.Zoom;
 
+            // Optimized DoubleBuffer
             this.DoubleBuffered = true;
 
 
