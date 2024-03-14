@@ -86,7 +86,6 @@ namespace Launcher
             listBox1.MouseMove += listBox1_MouseMove;
             listBox1.MouseLeave += listBox1_MouseLeave;
 
-
         }
 
         private async void Add_Click(object sender, EventArgs e)
@@ -105,6 +104,10 @@ namespace Launcher
             if (string.IsNullOrEmpty(enteredName)) return;
             // Assign name
             Reference_Game.Name = enteredName;
+
+            // Search About
+            string searchTerm = enteredName;
+            await Wiki.SearchAsync(searchTerm);
 
             // Search the game for get Grids and Heroes
             (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGameManager.SearchGameAsync(enteredName);
