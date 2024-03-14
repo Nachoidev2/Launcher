@@ -49,6 +49,7 @@ namespace Launcher
 
             tableLayoutPanel1.BackColor = Color.FromArgb(128, tableLayoutPanel1.BackColor);
 
+
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
             Play.Font = new Font(Play.Font.FontFamily, 16, FontStyle.Bold);
@@ -100,7 +101,7 @@ namespace Launcher
             Reference_Game.Path = selectedFilePath;
 
             // Input Name
-            string enteredName = OpenPromptDialog("Name Game", "Diálogo de entrada");
+            string enteredName = OpenPromptDialog("Name Game", "", Path.GetFileNameWithoutExtension(selectedFilePath));
             if (string.IsNullOrEmpty(enteredName)) return;
             // Assign name
             Reference_Game.Name = enteredName;
@@ -143,7 +144,7 @@ namespace Launcher
             return null;
         }
 
-        private string OpenPromptDialog(string text, string caption)
+        private string OpenPromptDialog(string text, string caption, string defaultValue = "")
         {
             Form prompt = new Form()
             {
@@ -155,7 +156,7 @@ namespace Launcher
             };
 
             Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400, Text = defaultValue }; // Se establece el valor predeterminado aquí
             Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
 
             confirmation.Click += (sender, e) => { prompt.Close(); };
@@ -174,6 +175,7 @@ namespace Launcher
             // En caso de cancelar, retorna una cadena vacía
             return string.Empty;
         }
+
 
         //Play Game
         private void Play_Click(object sender, EventArgs e)
