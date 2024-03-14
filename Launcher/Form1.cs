@@ -44,6 +44,8 @@ namespace Launcher
 
             // Optimized DoubleBuffer
             this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
 
 
             //Set Fonts
