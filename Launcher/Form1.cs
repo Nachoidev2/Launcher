@@ -47,6 +47,7 @@ namespace Launcher
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.UpdateStyles();
 
+            tableLayoutPanel1.BackColor = Color.FromArgb(128, tableLayoutPanel1.BackColor);
 
             //Set Fonts
             listBox1.Font = new Font(listBox1.Font.FontFamily, 12, FontStyle.Regular);
