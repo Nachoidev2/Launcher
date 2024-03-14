@@ -106,8 +106,8 @@ namespace Launcher
             Reference_Game.Name = enteredName;
 
             // Search About
-            string searchTerm = enteredName;
-            await Wiki.SearchAsync(searchTerm);
+            //string searchTerm = enteredName;
+            //await Wiki.SearchAsync(searchTerm);
 
             // Search the game for get Grids and Heroes
             (SteamGridDbGrid[] grids, SteamGridDbHero[] heroes) = await SearchGameManager.SearchGameAsync(enteredName);

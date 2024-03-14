@@ -37,18 +37,6 @@ namespace Launcher
 
                 Console.WriteLine();
                 Console.WriteLine();
-
-                //We change the language to Spanish
-                req.WikiLanguage = WikiLanguage.Spanish;
-
-                resp = await client.SearchAsync(req).ConfigureAwait(false);
-
-                Console.WriteLine($"Found {resp.QueryResult.SearchResults.Count} Spanish results:");
-
-                foreach (SearchResult s in resp.QueryResult.SearchResults)
-                {
-                    Console.WriteLine($" - {s.Title}");
-                }
             }
         }
     }
