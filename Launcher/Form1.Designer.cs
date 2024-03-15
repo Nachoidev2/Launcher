@@ -35,7 +35,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.Cover = new System.Windows.Forms.PictureBox();
             this.Play = new System.Windows.Forms.Button();
-            this.Description = new System.Windows.Forms.Label();
+            this.Description = new ZBobb.AlphaBlendTextBox();
             this.NameLauncher = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Close = new System.Windows.Forms.Button();
@@ -170,14 +170,21 @@
             // 
             // Description
             // 
-            this.Description.AutoSize = true;
+            this.Description.BackAlpha = 10;
+            this.Description.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.Description.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Description.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(4, 426);
+            this.Description.ForeColor = System.Drawing.SystemColors.Window;
+            this.Description.Location = new System.Drawing.Point(4, 429);
+            this.Description.Multiline = true;
             this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(511, 163);
+            this.Description.ReadOnly = true;
+            this.Description.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Description.Size = new System.Drawing.Size(511, 157);
             this.Description.TabIndex = 4;
-            this.Description.Text = "label1";
+            this.Description.Text = "Description";
             // 
             // NameLauncher
             // 
@@ -306,7 +313,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox Cover;
         private System.Windows.Forms.Button Play;
-        private System.Windows.Forms.Label Description;
+        private ZBobb.AlphaBlendTextBox Description;
     }
     }
 
