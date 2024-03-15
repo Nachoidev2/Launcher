@@ -18,8 +18,16 @@ namespace Launcher
 
             if (game != null)
             {
-                // Suponiendo que quieres remover las etiquetas HTML de la descripción
-                return StripHtmlTags(game.Description);
+                // Obtener solo la descripción del juego
+                string description = game.Description;
+
+                // Eliminar etiquetas HTML de la descripción
+                description = StripHtmlTags(description);
+
+                // Eliminar el encabezado "Overview" si está presente
+                description = RemoveOverviewHeader(description);
+
+                return description;
             }
             else
             {
@@ -31,6 +39,22 @@ namespace Launcher
         private static string StripHtmlTags(string input)
         {
             return Regex.Replace(input, "<.*?>", String.Empty);
+        }
+
+        // Método para eliminar el encabezado "Overview" si está presente
+        private static string RemoveOverviewHeader(string input)
+        {
+            // Buscar la posición donde comienza el texto de la descripción
+            int startIndex = input.IndexOf("Overview");
+
+            // Verificar si se encontró la palabra "Overview" y si está al principio de la cadena
+            if (startIndex != -1 && startIndex == 0)
+            {
+                // Eliminar la parte inicial que contiene "Overview"
+                input = input.Substring(startIndex + "Overview".Length).Trim();
+            }
+
+            return input;
         }
     }
 }
