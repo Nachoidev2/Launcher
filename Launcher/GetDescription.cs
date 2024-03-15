@@ -25,7 +25,8 @@ namespace Launcher
                 description = StripHtmlTags(description);
 
                 // Eliminar el encabezado "Overview" si está presente
-                description = RemoveOverviewHeader(description);
+                description = RemoveHeader(description, "Overview");
+                description = RemoveHeader(description, "Concept art");
 
                 return description;
             }
@@ -42,16 +43,13 @@ namespace Launcher
         }
 
         // Método para eliminar el encabezado "Overview" si está presente
-        private static string RemoveOverviewHeader(string input)
+        private static string RemoveHeader(string input, string header)
         {
-            // Buscar la posición donde comienza el texto de la descripción
-            int startIndex = input.IndexOf("Overview");
+            int startIndex = input.IndexOf(header);
 
-            // Verificar si se encontró la palabra "Overview" y si está al principio de la cadena
             if (startIndex != -1 && startIndex == 0)
             {
-                // Eliminar la parte inicial que contiene "Overview"
-                input = input.Substring(startIndex + "Overview".Length).Trim();
+                input = input.Substring(startIndex + header.Length).Trim();
             }
 
             return input;
