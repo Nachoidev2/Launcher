@@ -106,6 +106,7 @@ namespace Launcher
             Reference_Game.Name = enteredName;
             // add game at the list and update UI
             listBox1.Items.Add(Reference_Game);
+            SaveGames();
 
             // Search About
             string overview = await GetDescription.GetGameOverview(enteredName);
@@ -132,7 +133,7 @@ namespace Launcher
 
             // add game at the list and update UI
             //listBox1.Items.Add(Reference_Game);
-            GameSelect(false);
+            //GameSelect(false);
             SaveGames();
         }
 
