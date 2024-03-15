@@ -106,7 +106,9 @@ namespace Launcher
             Reference_Game.Name = enteredName;
 
             // Search About
-            //string searchTerm = enteredName;
+            string overview = await GetDescription.GetGameOverview(enteredName);
+            Reference_Game.Description = overview;
+
             //await Wiki.SearchAsync(searchTerm);
 
             // Search the game for get Grids and Heroes
@@ -403,12 +405,14 @@ namespace Launcher
                 {
                     Cover.ImageLocation = Reference_Game.Cover;
                     this.BackgroundImage = Image.FromFile(Reference_Game.Background);
+                    Description.Text = Reference_Game.Description;
                 }
             }
             else
             {
                 Cover.ImageLocation = null;
                 this.BackgroundImage = null;
+                Description.Text = null;
             }
         }
 
